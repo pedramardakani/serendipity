@@ -1,33 +1,44 @@
 # Pedram Ashofteh-Ardakani <pedramardakani@pm.me>
 #
-# Print ways we can pay up 'target' amount with coins of only 'change'.
-# Assume we have infinite coins.
+# Print ways we can pay up 'bill' with only specified 'change'
+# Assume we have infinite coins, and the order doesn't matter.
+#
+# For a demo just run '$ python3 bill_test.py'
 
 import numpy as np
+from typing import List
 
-target = 8
-change = np.array([5,1,2])
-
-if __name__ == "__main__":
+def solve(change: List[int], bill: int) -> int:
 
     # Initialize
     done = 0
     results = []
-    change.sort()
     direction = -1
-    last_element = len(change)-1
-    temp = np.zeros_like(change)
+
+    # Remove impossible changes of 'zero' and negative
+    # Sort so we can go through them in descending order
+    # Also, np.unique casts 'change' to a numpy array as well
+    sorted_change = np.unique(change)
+    sorted_change = np.delete(change, np.argwhere( (change <= 0) ))
+    np.sort(sorted_change)
+
+    # Initially use the 'last_element' to start solving the problem
+    last_element = len(sorted_change)-1
+
+    # Keep a temporary array of the current situation so we can decide for
+    # the next steps. Starting with all zeros, which means, 'zero' number
+    # of each change
+    temp = np.zeros_like(sorted_change)
 
     index = last_element
-    print(f"Question:\n\t{change}, {target}")
-
+    print(f"\n> Change {bill} bill using {change} bills")
     while done == 0:
         if direction == -1:
 
             # We're moving left
-            remaining = target-temp.dot(change)
-            temp[index] = remaining // change[index]
-            remaining = target - temp.dot(change)
+            remaining = bill-temp.dot(sorted_change)
+            temp[index] = remaining // sorted_change[index]
+            remaining = bill - temp.dot(sorted_change)
             if remaining == 0:
 
                 # Got an answer, save!
@@ -73,6 +84,8 @@ if __name__ == "__main__":
                 else:
                     index += 1
 
-    print("Solutions:")
     for i, f in enumerate(results):
-        print('\t', i, f)
+        print(f'  Solution #{1+i:02d}: {f} . {sorted_change} = '
+              f'{f.dot(sorted_change)}')
+
+    return len(results)
