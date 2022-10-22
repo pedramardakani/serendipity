@@ -1,6 +1,6 @@
 # ZeroMQ demo software
 
-Quoted from [zeromq docs](https://zguide.zeromq.org/docs/preface/):
+✍ Quoted from [zeromq docs](https://zguide.zeromq.org/docs/preface/):
 
 > ZeroMQ in a Hundred Words
 >
@@ -12,7 +12,7 @@ Quoted from [zeromq docs](https://zguide.zeromq.org/docs/preface/):
 > It has a score of language APIs and runs on most operating systems.
 > ZeroMQ is from iMatix and is LGPLv3 open source.
 
-## Purpose of this particular directory
+## Purpose of this particular directory 🎯
 
 I was using `RabbitMQ` and `SocketIO` in my `python` and `JavaScript` projects already.
 But then came `C++`.
@@ -26,7 +26,7 @@ Things just worked out 😎
 
 I'll put some demos here for "the future me" and anyone else interested 😶‍🌫️
 
-## Building the first example
+## Building the first example 🐣
 
 Follow the build instructions on [cppzmq](https://github.com/zeromq/cppzmq), in short:
 
@@ -74,7 +74,7 @@ Follow the build instructions on [cppzmq](https://github.com/zeromq/cppzmq), in 
 
    Watch them exchanging messages!
 
-## Building your own programs
+## Building your own programs 🏋
 
    1. Set up the base project:
 
@@ -125,3 +125,29 @@ Follow the build instructions on [cppzmq](https://github.com/zeromq/cppzmq), in 
      make
      ./bin/main
      ```
+# ZeroMQ examples 🧑‍🏫
+
+The [zguide](https://github.com/imatix/zguide) repository contains many examples for all the programming languages and frameworks that `zmq` supports, such as `C`, `C++`, `Python`, `Go`, `Rust`, `Java`, `Node.js`, etc.
+You can simply clone that repository, change directory to the example in the language you need, and just run `./build`!
+
+For example:
+
+```bash
+$ cd $TOPDIR
+$ git clone https://github.com/imatix/zguide --depth 1
+
+[[ ... git cloning process ... ]]
+
+$ cd zguide/examples/C++
+$ ./build
+
+[[ ... the build output ... ]]
+
+$ pwd # print working directory, and copy for the next step
+```
+
+Then open two terminals in the same directory, and run `./hwclient` and `./hwserver` for a demo 🍎
+
+| Terminal #1  | Terminal #2  |
+| ------------ | ------------ |
+| `./hwclient` | `./hwserver` |
